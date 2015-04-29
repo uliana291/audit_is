@@ -19,7 +19,7 @@
  */
 var OpenDialog = Modal.extend({
     type: "save",
-    closeText: "Open",
+    closeText: "Открыть",
 
     events: {
         'click': 'select_root_folder', /* select root folder */
@@ -34,8 +34,8 @@ var OpenDialog = Modal.extend({
     },
     
     buttons: [
-        { id: "test", text: "Open", method: "open_query" },
-        { text: "Cancel", method: "close" }
+        { id: "test", text: "Открыть", method: "open_query" },
+        { text: "Отмена", method: "close" }
     ],
 
     initialize: function(args) {
@@ -230,7 +230,7 @@ var OpenDialog = Modal.extend({
 
         var selected_query = new SavedQuery({ file: file });
         this.close();
-        Saiku.ui.block("Opening query...");
+        Saiku.ui.block("Выполнение запроса...");
         var item = this.queries[file];
                 var params = _.extend({ 
                         file: file,

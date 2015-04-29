@@ -51,7 +51,7 @@ var OpenQuery = Backbone.View.extend({
     },
 
     caption: function() {
-        return "Repository";
+        return "Репозиторий";
     },
 
     /*jshint -W069 */
@@ -66,13 +66,13 @@ var OpenQuery = Backbone.View.extend({
 
         var self = this;
         var menuitems = {
-                    "open": {name: "Open", i18n: true },
-                    "edit": {name: "Edit", i18n: true },
+                    "open": {name: "Открыть", i18n: true },
+                    "edit": {name: "Редактировать", i18n: true },
 //                    "rename": {name: "Rename", i18n: true },
-                    "delete": {name: "Delete", i18n: true },
-                    "move": {name: "Move", i18n: true},
+                    "delete": {name: "Удалить", i18n: true },
+                    "move": {name: "Переместить", i18n: true},
                     "sep1": "---------",
-                    "new": {name: "New Folder", i18n: true}
+                    "new": {name: "Новая папка", i18n: true}
         };
         $.each(menuitems, function(key, item){
             recursive_menu_translate(item, Saiku.i18n.po_file);
@@ -399,7 +399,7 @@ var OpenQuery = Backbone.View.extend({
     edit_permissions: function(event) {
         (new PermissionsModal({
             workspace: this.workspace,
-            title: "<span class='i18n'>Permissions</span>",
+            title: "<span class='i18n'>Разрешения</span>",
             file: this.selected_query.get('file')
         })).open();
     },

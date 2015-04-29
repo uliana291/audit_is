@@ -21,8 +21,8 @@ var PermissionsModal = Modal.extend({
     type: "permissions",
     
     buttons: [
-        { text: "Ok", method: "ok" },
-        { text: "Cancel", method: "close" }
+        { text: "Oк", method: "ok" },
+        { text: "Отмена", method: "close" }
     ],
 
     events: {

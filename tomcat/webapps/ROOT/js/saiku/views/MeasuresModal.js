@@ -20,7 +20,7 @@
 var MeasuresModal = Modal.extend({
 
     type: "filter",
-    closeText: "Save",
+    closeText: "Сохранить",
 
     events: {
         'submit form': 'save',
@@ -29,16 +29,16 @@ var MeasuresModal = Modal.extend({
 
     buttons: [
         { text: "OK", method: "save" },
-        { text: "Cancel", method: "close" }
+        { text: "Отмена", method: "close" }
     ],
 
     message: "<form id='measure_form'>" +
                      "<table border='0px'>" +
-                     "<tr><td class='col0 i18n'>Name:</td>" +
-                     "<td class='col1'><input type='text' class='measure_name' value='Measure Name'></input></td></tr>" +
-                     "<tr><td class='col0 i18n'>Formula:</td>" +
+                     "<tr><td class='col0 i18n'>Название:</td>" +
+                     "<td class='col1'><input type='text' class='measure_name' value='Название меры'></input></td></tr>" +
+                     "<tr><td class='col0 i18n'>Формула:</td>" +
                      "<td class='col1'><textarea class='measureFormula'>Measures.[Store Sales] + 100</textarea></td></tr>" +
-                     "<tr><td class='col0 i18n'>Format:</td>" +
+                     "<tr><td class='col0 i18n'>Формат:</td>" +
                      "<td class='col1'><input class='measure_format' type='text' value='#,##0.00'></input></td></tr>" +
                      "</table></form>",
 
@@ -52,11 +52,11 @@ var MeasuresModal = Modal.extend({
         this.measure = args.measure;
         _.bindAll(this, "save");
 
-        this.options.title = "Calculated Measure";
+        this.options.title = "Рассчитаная мера";
 
         if (this.measure) {
             _.extend(this.options, {
-                title: "Custom Filter for " + this.axis
+                title: "Фильтр для " + this.axis
             });
         }
 
@@ -86,10 +86,10 @@ var MeasuresModal = Modal.extend({
 
         var alert_msg = "";
         if (typeof measure_name == "undefined" || !measure_name) {
-            alert_msg += "You have to enter a name for the measure! ";
+            alert_msg += "Вы должны ввести наименование меры! ";
         }
         if (typeof measure_formula == "undefined" || !measure_formula || measure_formula === "") {
-            alert_msg += "You have to enter a MDX formula for the calculated measure! ";
+            alert_msg += "Вы должны вветси MDX формулу для меры! ";
         }
         if (alert_msg !== "") {
             alert(alert_msg);

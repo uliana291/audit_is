@@ -30,7 +30,7 @@ var WorkspaceDropZone = Backbone.View.extend({
         'click .d_measure' : 'remove_measure_click',
         'click .d_level': 'selections',
         // 'click .d_measure span.sort' : 'sort_measure',
-        'click .measure_fields.limit' : 'measure_action',
+        //'click .measure_fields.limit' : 'measure_action',
         'click .axis_fields_header.limit' : 'limit_axis',
         'click .clear_axis' : 'clear_axis'
     },
@@ -319,57 +319,6 @@ var WorkspaceDropZone = Backbone.View.extend({
         return false;
     },
 
-	measure_action: function(event) {
-		var self = this;
-		if (typeof this.workspace.query == "undefined" || this.workspace.query.model.type != "QUERYMODEL" || Settings.MODE == "view") {
-			return false;
-		}
-		var $target = $(event.target).hasClass('limit') ? $(event.target) : $(event.target).parent();
-		var menuitems = {
-			"HEADER": {name: "Position", disabled:true, i18n: true },
-			"sep1": "---------",
-			"BOTTOM_COLUMNS": {name: "Columns | Measures", i18n: true },
-			"TOP_COLUMNS": {name: "Measures | Columns", i18n: true },
-			"BOTTOM_ROWS": {name: "Rows | Measures", i18n: true },
-			"TOP_ROWS": {name: "Measures | Rows", i18n: true },
-			"sep2": "---------",
-			"reset": {name: "Reset Default", i18n: true },
-			"cancel": {name: "Cancel", i18n: true }
-		};
-		$.each(menuitems, function(key, item){
-			recursive_menu_translate(item, Saiku.i18n.po_file);
-		});
-		$.contextMenu('destroy', '.limit');
-		$.contextMenu({
-			appendTo: $target,
-			selector: '.limit',
-			ignoreRightClick: true,
-			build: function($trigger, e) {
-				var query = self.workspace.query;
-				var cube = self.workspace.selected_cube;
-				return {
-					callback: function(key, options) {
-						var details = query.helper.model().queryModel.details;
-						if (key === "cancel") {
-							return;
-						}
-						if ( key === "reset") {
-							details.location = SaikuOlapQueryTemplate.queryModel.details.location;
-							details.axis = SaikuOlapQueryTemplate.queryModel.details.axis;
-						} else {
-							var location = key.split('_')[0];
-							var axis = key.split('_')[1];
-							details.location = location;
-							details.axis = axis;
-						}
-						query.run();
-					},
-					items: menuitems
-				}
-			}
-		});
-		$target.contextMenu();
-	},
 
     limit_axis: function(event) {
         var self = this;
@@ -474,38 +423,38 @@ var WorkspaceDropZone = Backbone.View.extend({
                 };
 
                 var citems = {
-                        "filter" : {name: "Filter", i18n: true, items:
+                        "filter" : {name: "Фильтр", i18n: true, items:
                          {
-                                "customfilter": {name: "Custom...", i18n: true },
-                                "clearfilter": {name: "Clear Filter", i18n: true }
+                                "customfilter": {name: "Настроить...", i18n: true },
+                                "clearfilter": {name: "Сбросить фильтр", i18n: true }
                          }},
-                        "limit" : {name: "Limit", i18n: true, items:
+                        "limit" : {name: "Лимит", i18n: true, items:
                         {
-                                "TopCount###SEPARATOR###10": {name: "Top 10", i18n: true },
-                                "BottomCount###SEPARATOR###10": {name: "Bottom 10", i18n: true },
-                                "TopCountQuick" : { name: "Top 10 by...", i18n: true, items: addFun(items, "TopCount") },
-                                "BottomCountQuick" : { name: "Bottom 10 by...", i18n: true, items: addFun(items, "BottomCount") },
-                                "customtop" : {name: "Custom Limit...", i18n: true },
-                                "clearlimit" : {name: "Clear Limit", i18n: true }
+                                "TopCount###SEPARATOR###10": {name: "Первые 10", i18n: true },
+                                "BottomCount###SEPARATOR###10": {name: "Последние 10", i18n: true },
+                                "TopCountQuick" : { name: "Первые 10 по...", i18n: true, items: addFun(items, "TopCount") },
+                                "BottomCountQuick" : { name: "Последние 10 по...", i18n: true, items: addFun(items, "BottomCount") },
+                                "customtop" : {name: "Настроить...", i18n: true },
+                                "clearlimit" : {name: "Сбросить лимит", i18n: true }
                          }},
-                        "sort" : {name: "Sort", i18n: true, items:
+                        "sort" : {name: "Сортировка", i18n: true, items:
                         {
-                            "ASCQuick": {name: "Ascending" , i18n: true, items: addFun(items, "ASC") },
-                            "DESCQuick": {name: "Descending", i18n: true, items: addFun(items, "DESC")},
-                            "BASCQuick": {name: "Ascending (Breaking Hierarchy)", i18n: true, items: addFun(items, "BASC")},
-                            "BDESCQuick": {name: "Descending (Breaking Hierarchy)", i18n: true, items: addFun(items, "BDESC") },
-                            "customsort" : { name: "Custom...", i18n: true },
-                            "clearsort" : {name: "Clear Sort", i18n: true }
+                            "ASCQuick": {name: "По возрастанию" , i18n: true, items: addFun(items, "ASC") },
+                            "DESCQuick": {name: "По убыванию", i18n: true, items: addFun(items, "DESC")},
+                            "BASCQuick": {name: "По возрастанию (По иерархии)", i18n: true, items: addFun(items, "BASC")},
+                            "BDESCQuick": {name: "По убыванию (По иерархии)", i18n: true, items: addFun(items, "BDESC") },
+                            "customsort" : { name: "Настроить...", i18n: true },
+                            "clearsort" : {name: "Сбросить сортировку", i18n: true }
                         }},
-                        "grand_totals" : {name: "Grand totals", i18n: true, items:
+                        "grand_totals" : {name: "Итоги", i18n: true, items:
                         {
-                            "show_totals_not": {name: "None", i18n: true},
-                            "show_totals_sum": {name: "Sum", i18n: true},
-                            "show_totals_min": {name: "Min", i18n: true},
-                            "show_totals_max": {name: "Max", i18n: true},
-                            "show_totals_avg": {name: "Avg", i18n: true}
+                            "show_totals_not": {name: "Нет", i18n: true},
+                            "show_totals_sum": {name: "Сумма", i18n: true},
+                            "show_totals_min": {name: "Минимум", i18n: true},
+                            "show_totals_max": {name: "Максимум", i18n: true},
+                            "show_totals_avg": {name: "Среднее", i18n: true}
                         }},
-                        "cancel" : { name: "Cancel", i18n: true }
+                        "cancel" : { name: "Отмена", i18n: true }
 
                 };
                 $.each(citems, function(key, item){

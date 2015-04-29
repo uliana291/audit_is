@@ -9,7 +9,7 @@
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Saiku - Next Generation Open Source Analytics</title>
+    <title>Аудит информационной безопасности</title>
 
     <!--[if lt IE 9]><script type="text/javascript" src="js/svgweb/svg.js" data-path="js/svgweb/"></script><![endif]-->
     <meta name="svg.render.forceflash" content="true">
@@ -39,7 +39,7 @@
         <span class="saiku_logo">&nbsp;</span>
         <div class="processing_content">
             <span class="processing_image">&nbsp;</span>
-            <span class="processing_message i18n">Loading...</span>
+            <span class="processing_message i18n">Загрузка...</span>
         </div>
     </div>
 </div>
@@ -197,31 +197,27 @@
 <!-- Templates -->
 <script type="text/x-jquery-tmpl" id="template-toolbar">
             <ul>
-                    <li><a id='new_query' href='#new_query' title='New query' class='new_tab i18n sprite'></a></li>
+                    <li><a id='new_query' href='#new_query' title='Новый запрос' class='new_tab i18n sprite'></a></li>
                     <li class='separator'>&nbsp;</li>
-                    <li><a id='open_query' href='#open_query' title='Open query' class='open_query i18n sprite'></a></li>
+                    <li><a id='open_query' href='#open_query' title='Открыть запрос' class='open_query i18n sprite'></a></li>
                     <li class='separator'>&nbsp;</li>
-                    <li><a id='logout' href='#logout' title='Logout' class='logout i18n sprite'></a></li>
-                    <li><a id='about' href='#about' title='About' class='about i18n sprite'></a></li>
-                    <li><a id='help_icon' href='#help' target='_blank' title='Help' class='help i18n sprite'></a></li>
+                    <li><a id='logout' href='#logout' title='Выход' class='logout i18n sprite'></a></li>
+                    <li><a id='about' href='#about' title='О программе' class='about i18n sprite'></a></li>
+                    <li><a id='help_icon' href='#help' target='_blank' title='Помощь' class='help i18n sprite'></a></li>
 
                     <li class='separator'>&nbsp;</li>
 <!--                    <li><a id='issue_tracker' href='#issue_tracker' title='Issue Tracker' class='bug i18n sprite'></a></li>-->
             </ul>
-                <h1 id='logo'>
-                    <a href='http://www.analytical-labs.com/' title='Saiku - Next Generation Open Source Analytics' target="_blank" class='sprite'>Saiku</a>
-                </h1>
         </script>
 
 <script type="text/x-jquery-tmpl" id="template-upgrade">
             <div class="upgradeheader">
-                You are using Saiku Community Edition, please consider <a target="_blank" href="http://saiku.meteorite.bi/support">purchasing support, or entering a sponsorship agreement with us</a> to support development. <a href="mailto:info@meteorite.bi?subject=Supporting Saiku">info@meteorite.bi</a><span class="close_tab sprite"></span>
             </div>
         </script>
 
 <script type="text/x-jquery-tmpl" id="template-cubes">
             <select class="cubes">
-                <option value="" class="i18n">Select a cube</option>
+                <option value="" class="i18n">Выберите куб</option>
                 <% _.each(connections, function(connection) { %>
                     <% _.each(connection.catalogs, function(catalog) { %>
                         <% _.each(catalog.schemas, function(schema) {
@@ -278,7 +274,7 @@
         <ul>
             <li>
                 <span class="root expand sprite"></span>
-                   <a href="#" title="Measures" class="folder_expand sprite i18n">Measures</a>
+                   <a href="#" title="Меры" class="folder_expand sprite i18n">Меры</a>
 
                 <ul>
                 <% _.each(measures, function(measure) { %>
@@ -297,7 +293,7 @@
         <ul>
             <li>
                 <span class="root expand sprite"></span>
-                   <a href="#" title="Calculated Measures" class="folder_expand sprite i18n">Calculated Measures</a>
+                   <a href="#" title="Calculated measure" class="folder_expand sprite i18n">Рассчитанные меры</a>
                 <% if (measures) { %>
                 <ul>
                 <% _.each(measures, function(measure) { %>
@@ -326,7 +322,7 @@
                     <span class="editor_info hide"></span>
 
                 </div>
-                <div id="query_processing" class="query_processing" style="display:none;"><span class="processing_image">&nbsp;&nbsp;</span> <span class="i18n">Running query...</span>  [&nbsp;<a class="cancel i18n" href="#cancel">Cancel</a>&nbsp;]</div>
+                <div id="query_processing" class="query_processing" style="display:none;"><span class="processing_image">&nbsp;&nbsp;</span> <span class="i18n">Выполнение запроса...</span>  [&nbsp;<a class="cancel i18n" href="#cancel">Отмена</a>&nbsp;]</div>
 
                 <div class="workspace_results_info" align="right" />
                 <div class="workspace_results">
@@ -336,11 +332,11 @@
         </div>
         <div class="sidebar">
             <div>
-                <h3 class="top i18n">Cubes</h3>
+                <h3 class="top i18n">Кубы</h3>
                 <div class="refresh_cubes_nav">
                     <a href="#refresh_cubes"
                         class="i18n button refresh_cubes"
-                        title="Refresh Cubes (Clear Cache)"></a>
+                        title="Обновить кубы (Очистить кэш)"></a>
                 </div>
                 <div class="admin_console_nav"></div>
             </div>
@@ -360,21 +356,21 @@
 <script type="text/x-jquery-tmpl" id="template-attributes">
 
         <div class="metadata_attribute_container">
-            <h3 class="measure_caption"><span class="i18n">Measures</span><a class="button addMeasure i18n" style="display:none;">Add</a></h3>
+            <h3 class="measure_caption"><span class="i18n">Меры</span><a class="button addMeasure" style="display:none;">Добавить</a></h3>
             <div class="sidebar_inner measure_tree">
                 <% if (typeof cube != "undefined" && cube && cube.dimensions) { %>
                     <%= _.template($("#template-measures").html(), { measures: cube.measures }) %>
                 <% } else { %>
-                    <span class="i18n loading hide">Loading...</span>
+                    <span class="i18n loading hide">Загрузка...</span>
                 <% } %>
                 <div class="calculated_measures" style="display:none;"></div>
             </div>
-            <h3 class="i18n">Dimensions</h3>
+            <h3 class="i18n">Измерения</h3>
             <div class="sidebar_inner dimension_tree">
                 <% if (typeof cube != "undefined" && cube && cube.dimensions) { %>
                     <%=  _.template($("#template-dimensions").html(), { dimensions: cube.dimensions }) %>
                 <% } else { %>
-                    <span class="i18n loading hide">Loading...</span>
+                    <span class="i18n loading hide">Загрузка...</span>
                 <% } %>
 
             </div>
@@ -386,7 +382,7 @@
 <script type="text/x-jquery-tmpl" id="template-workspace-dropzones">
         <div class="workspace_fields disabled">
             <div class="fields_list details_fields" title="DETAILS">
-                <div class="fields_list_header measure_fields disabled_toolbar"><span class="i18n">Measures</span><span class="dropdown"></span></div>
+                <div class="fields_list_header measure_fields disabled_toolbar"><span class="i18n">Меры</span><span class="dropdown"></span></div>
                 <div class="fields_list_body details">
                     <ul class="connectable"></ul>
                 </div>
@@ -394,7 +390,7 @@
                 <div class="clear"></div>
             </div>
             <div class="fields_list columns_fields" title="COLUMNS">
-                <div class="fields_list_header axis_fields_header disabled_toolbar"><span class="i18n">Columns</span><span class="dropdown"></span></div>
+                <div class="fields_list_header axis_fields_header disabled_toolbar"><span class="i18n">Колонки</span><span class="dropdown"></span></div>
                 <div class="fields_list_body columns axis_fields">
                     <ul class="connectable"></ul>
                 </div>
@@ -402,7 +398,7 @@
                 <div class="clear"></div>
             </div>
             <div class="fields_list rows_fields" title="ROWS">
-                <div class="fields_list_header axis_fields_header disabled_toolbar"><span class="i18n">Rows</span><span class="dropdown"></span></div>
+                <div class="fields_list_header axis_fields_header disabled_toolbar"><span class="i18n">Строки</span><span class="dropdown"></span></div>
                 <div class="fields_list_body rows axis_fields">
                     <ul class="connectable"></ul>
                 </div>
@@ -410,7 +406,7 @@
                 <div class="clear"></div>
             </div>
             <div class="fields_list filter_fields" title="FILTER">
-                <div class="fields_list_header axis_fields_header disabled_toolbar"><span class="i18n">Filter</span><span class="dropdown"></span></div>
+                <div class="fields_list_header axis_fields_header disabled_toolbar"><span class="i18n">Фильтр</span><span class="dropdown"></span></div>
                 <div class="fields_list_body filter axis_fields">
                     <ul class="connectable"></ul>
                 </div>
@@ -424,22 +420,22 @@
         <ul>
             <li><a href="#open_query"
                 class="i18n open button sprite"
-                title="Open query"></a></li>
+                title="Открыть запрос"></a></li>
             <li><a href="#save_query"
                 class="i18n save button disabled_toolbar sprite"
-                title="Save query"></a></li>
+                title="Сохранить запрос"></a></li>
             <li class="seperator"><a href="#new_query"
                 class="i18n new disabled_toolbar button sprite"
-                title="Reset query"></a></li>
+                title="Очистить запрос"></a></li>
             <li><a href="#edit_query"
                 class="i18n edit button on disabled_toolbar sprite"
-                title="Edit query"></a></li>
+                title="Редактировать запрос"></a></li>
             <li class="seperator"><a href="#run_query"
                 class="i18n run button disabled_toolbar sprite"
-                title="Run query"></a></li>
+                title="Выполнить запрос"></a></li>
             <li><a href="#automatic_execution"
                 class="i18n auto button disabled_toolbar sprite"
-                title="Automatic execution"></a></li>
+                title="Автоматическое выполнение"></a></li>
 <!--
             <li><a href="#toggle_fields"
                 class="i18n toggle_fields button sprite"
@@ -450,46 +446,32 @@
 -->
             <li class="seperator"><a href="#group_parents"
                 class="i18n group_parents button disabled_toolbar sprite"
-                title="Hide Parents"></a></li>
+                title="Скрыть предков"></a></li>
             <li><a href="#non_empty"
                 class="i18n non_empty button disabled_toolbar sprite"
-                title="Non-empty"></a></li>
+                title="Непустой"></a></li>
             <li><a href="#swap_axis"
                 class="i18n swap_axis button disabled_toolbar sprite"
-                title="Swap axis"></a></li>
+                title="Поменять оси"></a></li>
             <li><a href="#show_mdx"
                 class="i18n mdx button disabled_toolbar sprite"
-                title="Show MDX"></a></li>
+                title="Показать MDX"></a></li>
             <!-- <li><a href="#explain_query"
                 class="i18n explain_query button disabled_toolbar sprite"
                 title="Show Explain Plan"></a></li> -->
-            <li class="seperator"><a href="#zoom_mode"
-                class="i18n table_mode zoom_mode button disabled_toolbar"
-                title="Zoom into table"></a></li>
-            <li class="seperator"><a href="#query_scenario"
-                class="i18n table_mode query_scenario button disabled_toolbar sprite"
-                title="Query Scenario"></a></li>
-	<li class="seperator"><a href="#drillacross"
-class="i18n table_mode drillacross button disabled_toolbar sprite"
-title="Drill across on cell"></a></li>
-            <li class="seperator"><a href="#drillthrough"
-                class="i18n table_mode drillthrough button disabled_toolbar sprite"
-                title="Drill through on cell"></a></li>
-            <li><a href="#export_drillthrough"
-                class="i18n table_mode drillthrough_export button disabled_toolbar sprite"
-                title="Export Drill-Through on cell to CSV"></a></li>
+	<li class="seperator"></li>
             <li class="seperator"><a href="#export_xls"
                 class="i18n export_xls button disabled_toolbar sprite"
-                title="Export XLS"></a></li>
+                title="Экспорт XLS"></a></li>
             <li><a href="#export_csv"
                 class="i18n export_csv button disabled_toolbar sprite"
-                title="Export CSV"></a></li>
+                title="Экспорт CSV"></a></li>
             <li><a href="#export_pdf"
                 class="i18n export_pdf button disabled_toolbar sprite"
-                title="EXPERIMENTAL: Export PDF"></a></li>
+                title="Тестовое: экспорт PDF"></a></li>
             <li><a href="#switch_to_mdx"
                 class="i18n switch_to_mdx button disabled_toolbar"
-                title="Switch to MDX Mode"></a></li>
+                title="Режим MDX"></a></li>
         </ul>
 
         </script>
@@ -499,20 +481,20 @@ title="Drill across on cell"></a></li>
         <ul class="renderer">
             <li><a href="#switch_render_button"
                 class="i18n render_table button disabled_toolbar on"
-                title="Table Mode"></a></li>
+                title="Режим таблицы"></a></li>
             <li><a href="#switch_render_button"
                 class="i18n render_chart button disabled_toolbar"
-                title="Chart Mode"></a></li>
+                title="Режим диаграмм"></a></li>
         </ul>
         <ul class='options table hide'>
                         <!--<li class="seperator_vertical label"><a class="i18n label disabled_toolbar">Options:</a></li> -->
 
             <li class="seperator_vertical"><a href="#spark_bar"
                 class="i18n spark_bar tablebutton button disabled_toolbar"
-                title="Spark Bar"></a></li>
+                title="Столбчатая"></a></li>
             <li><a href="#spark_line"
                 class="i18n spark_line button disabled_toolbar"
-                title="Spark Line"></a></li>
+                title="Линейная"></a></li>
            <!-- <li><a href="#asdf"
                 class="i18n button disabled_toolbar"
                 title="Spark Lines">Show Totals</a></li> -->
@@ -520,46 +502,43 @@ title="Drill across on cell"></a></li>
         </ul>
         <ul class='options chart hide'>
             <li class="seperator_vertical"><a href ="#export_button"
-                class="disabled_toolbar export_button menu button"><span class="i18n">Export</span><span class="dropdown"></span></a></li>
+                class="disabled_toolbar export_button menu button"><span class="i18n">Экспорт</span><span class="dropdown"></span></a></li>
             <li><a href="#bar"
                 class="i18n bar chartoption button disabled_toolbar"
-                title="Bar"></a></li>
+                title="Гистограмма"></a></li>
             <li><a href="#stackedBar"
                 class="i18n stackedBar chartoption on button disabled_toolbar"
-                title="Stacked Bar"></a></li>
+                title="Стопочная гистограмма"></a></li>
             <li><a href="#stackedBar100"
                 class="i18n stackedBar100 chartoption button disabled_toolbar"
-                title="Bar 100%"></a></li>
+                title="Гистограмма 100%"></a></li>
             <li><a href="#multiplebar"
                 class="i18n multiple chartoption button disabled_toolbar"
-                title="Multiple Bar Chart"></a></li>
+                title="Множественная гистограмма"></a></li>
             <li><a href="#line"
                 class="i18n line chartoption button disabled_toolbar"
-                title="Line"></a></li>
+                title="График"></a></li>
             <li><a href="#area"
                 class="i18n area chartoption button disabled_toolbar"
-                title="Area"></a></li>
+                title="Диаграмма с областями"></a></li>
             <li><a href="#heatgrid"
                 class="i18n heatgrid chartoption button disabled_toolbar"
-                title="Heat Grid"></a></li>
+                title="Тепловая сеть"></a></li>
             <li><a href="#treemap"
                 class="i18n treemap chartoption button disabled_toolbar"
-                title="Tree Map"></a></li>
+                title="Дерево"></a></li>
             <li><a href="#sunburst"
                 class="i18n sunburst chartoption button disabled_toolbar"
-                title="Sunburst"></a></li>
+                title="Лучевая диаграмма"></a></li>
             <li><a href="#dot"
                 class="i18n dot chartoption button disabled_toolbar"
-                title="Dot"></a></li>
+                title="Точечная диаграмма"></a></li>
             <li><a href="#waterfall"
                 class="i18n waterfall chartoption button disabled_toolbar"
-                title="Waterfall"></a></li>
+                title="Водопад"></a></li>
             <li><a href="#pie"
                 class="i18n pie chartoption button disabled_toolbar"
-                title="Pie"></a></li>
-           <!-- <li><a href="#chart_editor"
-                class="i18n custom_chart button disabled_toolbar"
-                title="Custom">Custom</a></li> -->
+                title="Круговая диаграмма"></a></li>
         </ul>
         </div>
         </script>
@@ -637,7 +616,7 @@ title="Drill across on cell"></a></li>
 
 <script type="text/x-jquery-tmpl" id="template-selections">
             <div class="header_selections">
-                <label for="filter_selections" class="i18n">Search:</label> &nbsp;<input name="filter_selections" id="filter_selections" disabled="true" type="text" class="filterbox" /> <input class="i18n search_term form_button" type="submit" value="Pre-Filter on Server" /><input class="i18n clear_search form_button" type="submit" value="Clear Filter" /><br />
+                <label for="filter_selections" class="i18n">Поиск:</label> &nbsp;<input name="filter_selections" id="filter_selections" disabled="true" type="text" class="filterbox" /> <input class="i18n search_term form_button" type="submit" value="Pre-Filter on Server" /><input class="i18n clear_search form_button" type="submit" value="Clear Filter" /><br />
             </div>
             <div class="available_selections caption">
                 <span class="i18n">Available members:</span><br/>

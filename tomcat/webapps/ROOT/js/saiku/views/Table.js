@@ -243,7 +243,7 @@ var Table = Backbone.View.extend({
                             }
                             :
                             {
-                                selections: "[" + items[key].payload + "]"
+                                selections: "[" + items + "]"
                             }
                     });
 

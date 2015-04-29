@@ -90,19 +90,11 @@ var Toolbar = Backbone.View.extend({
         return false;
     },
 
-    /**
-     * Go to the issue tracker
-     */
-    issue_tracker: function() {
-        window.open('http://jira.meteorite.bi/');
-        return false;
-    },
-
 	/**
 	 * Go to the help
 	 */
 	help: function() {
-		window.open('http://wiki.meteorite.bi/display/SAIK/Saiku+Documentation');
+		window.open('');
 		return false;
 	}
 });

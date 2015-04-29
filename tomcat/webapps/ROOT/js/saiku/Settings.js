@@ -18,7 +18,7 @@
  * Change settings here
  */
 var Settings = {
-    VERSION: "Saiku-3.1-SNAPSHOT",
+    VERSION: "1.0",
     BIPLUGIN: false,
     BIPLUGIN5: false,
     BASE_URL: window.location.origin,
@@ -28,7 +28,7 @@ var Settings = {
     DIMENSION_SHOW_ALL: true,
     DIMENSION_SHOW_REDUCED: false,
     ERROR_LOGGING: false,
-    I18N_LOCALE: "en",
+    I18N_LOCALE: "ru",
     // number of erroneous ajax calls in a row before UI cant recover
     ERROR_TOLERANCE: 3,
     QUERY_PROPERTIES: {
@@ -62,10 +62,10 @@ var Settings = {
     ],
     DEFAULT_VIEW_STATE: 'view', // could be 'edit' as well
     DEMO: false,
-    TELEMETRY_SERVER: 'http://telemetry.analytical-labs.com:7000',
+    TELEMETRY_SERVER: '',
     LOCALSTORAGE_EXPIRATION: 10 * 60 * 60 * 1000 /* 10 hours, in ms */,
     UPGRADE: true,
-    EVALUATION_PANEL_LOGIN: true
+    EVALUATION_PANEL_LOGIN: false
 };
 
 /**
@@ -176,13 +176,6 @@ if ($.blockUI) {
     $.blockUI.defaults.fadeIn = 0;
     $.blockUI.defaults.ignoreIfBlocked = false;
 
-}
-
-if (window.location.hostname && (window.location.hostname == "dev.analytical-labs.com" || window.location.hostname == "demo.analytical-labs.com" )) {
-    Settings.USERNAME = "admin";
-    Settings.PASSWORD = "admin";
-    Settings.DEMO = true;
-    Settings.UPGRADE = false;
 }
 
 var isIE = (function(){

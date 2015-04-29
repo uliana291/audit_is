@@ -44,9 +44,6 @@ var Workspace = Backbone.View.extend({
         this.toolbar = new WorkspaceToolbar({ workspace: this });
         this.toolbar.render();
 
-		this.upgrade = new Upgrade({ workspace: this});
-		this.upgrade.render();
-
         this.querytoolbar = new QueryToolbar({ workspace: this });
         this.querytoolbar.render();
 
@@ -124,49 +121,15 @@ var Workspace = Backbone.View.extend({
         if (increment) {
             Saiku.tabs.queryCount++;
         }
-        return "<span class='i18n'>Unsaved query</span> (" + (Saiku.tabs.queryCount) + ")";
+        return "<span class='i18n'>Несохраненный запрос</span> (" + (Saiku.tabs.queryCount) + ")";
     },
 
-    selected_cube_template: function(selectedCube) {
-        var connections = Saiku.session.sessionworkspace;
-        connections.selected = selectedCube;
-        return _.template(
-            '<select class="cubes">' +
-                '<option value="" class="i18n">Select a cube</option>' +
-                '<% _.each(connections, function(connection) { %>' +
-                    '<% _.each(connection.catalogs, function(catalog) { %>' +
-                        '<% _.each(catalog.schemas, function(schema) { %>' +
-                            '<% if (schema.cubes.length > 0) { %>' +
-                                '<optgroup label="<%= (schema.name !== "" ? schema.name : catalog.name) %> <%= (connection.name) %>">' +
-                                    '<% _.each(schema.cubes, function(cube) { %>' +
-                                        '<% if ((typeof cube["visible"] === "undefined" || cube["visible"]) && selected !== cube.caption) { %>' +
-                                            '<option value="<%= connection.name %>/<%= catalog.name %>/<%= ((schema.name === "" || schema.name === null) ? "null" : schema.name) %>/<%= encodeURIComponent(cube.name) %>"><%= ((cube.caption === "" || cube.caption === null) ? cube.name : cube.caption) %></option>' +
-                                        '<% } else if ((typeof cube["visible"] === "undefined" || cube["visible"]) && selected === cube.caption) { %>' +
-                                            '<option value="<%= connection.name %>/<%= catalog.name %>/<%= ((schema.name === "" || schema.name === null) ? "null" : schema.name) %>/<%= encodeURIComponent(cube.name) %>" selected><%= ((cube.caption === "" || cube.caption === null) ? cube.name : cube.caption) %></option>' +
-                                        '<% } %>' +
-                                    '<% }); %>' +
-                                '</optgroup>' +
-                            '<% } %>' +
-                        '<% }); %>' +
-                    '<% }); %>' +
-                '<% }); %>' +
-            '</select>'
-        )(connections);
-    },
 
     template: function() {
-        var template = $("#template-workspace").html() || "",
-            htmlCubeNavigation = false,
-            selectedCube;
-
-        if (this.isUrlCubeNavigation) {
-            selectedCube = this.selected_cube.split('/')[3],
-            htmlCubeNavigation = this.selected_cube_template(selectedCube);
-        }
+        var template = $("#template-workspace").html() || "";
 
         return _.template(template)({
-            cube_navigation: htmlCubeNavigation
-                ? htmlCubeNavigation
+            cube_navigation
                 : Saiku.session.sessionworkspace.cube_navigation
         });
     },
@@ -220,7 +183,7 @@ var Workspace = Backbone.View.extend({
             // Show toolbar
             $(this.el).find('.workspace_toolbar').append($(this.toolbar.el));
             $(this.el).find('.query_toolbar').append($(this.querytoolbar.el));
-			$(self.el).find('.upgrade').append($(self.upgrade.el));
+			//$(self.el).find('.upgrade').append($(self.upgrade.el));
 
 
         }
@@ -246,7 +209,7 @@ var Workspace = Backbone.View.extend({
             var $link = $('<a />')
                 .attr({
                     href: '#adminconsole',
-                    title: 'Admin Console'
+                    title: 'Настройки администратора'
                 })
                 .click(Saiku.AdminConsole.show_admin)
                 .addClass('button admin_console');
@@ -805,7 +768,7 @@ var Workspace = Backbone.View.extend({
                 + " &emsp;<b>Columns:</b> " + args.data.width
                 + " &emsp;<b>Duration:</b> " + runtime + "s";
         */
-        var info = '<b><span class="i18n">Info:</span></b> &nbsp;' + cdate +
+        var info = '<b><span class="i18n">Информация:</span></b> &nbsp;' + cdate +
                    "&emsp;/ &nbsp;" + args.data.width +
                    " x " + args.data.height +
                    "&nbsp; / &nbsp;" + runtime + "s";
@@ -890,11 +853,11 @@ var Workspace = Backbone.View.extend({
     },
 
     cancelled: function(args) {
-        this.processing.html('<span class="processing_image">&nbsp;&nbsp;</span> <span class="i18n">Canceling Query...</span>').show();
+        this.processing.html('<span class="processing_image">&nbsp;&nbsp;</span> <span class="i18n">Отмена запроса...</span>').show();
     },
 
     no_results: function(args) {
-        this.processing.html('<span class="i18n">No Results</span>').show();
+        this.processing.html('<span class="i18n">Результаты запроса отсутствуют.</span>').show();
     },
 
     error: function(args) {

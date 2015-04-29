@@ -24,12 +24,10 @@ var AboutModal = Modal.extend({
         'click a' : 'close'
     },
 
-    message: Settings.VERSION + '<br>' +
-        '<a href="http://saiku.meteorite.bi" target="_blank">http://saiku.meteorite.bi</a><br><br>' +
-        'Powered by <img src="images/src/meteorite_free.png" width="20px"> <a href="http://www.meteorite.bi/consulting/" target="_blank">www.meteorite.bi</a>',
+    message: "Аудит информационной безопасности " +Settings.VERSION,
 
     initialize: function() {
-        this.options.title = 'About ' + Settings.VERSION;
+        this.options.title = 'О версии ' + Settings.VERSION;
     },
 
     close: function(event) {

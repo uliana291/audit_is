@@ -39,7 +39,7 @@ var LoginForm = Modal.extend({
         "</form>")(),
 
     buttons: [
-        { text: "Login", method: "login" }
+        { text: "Вход", method: "login" }
     ],
 
     events: {
@@ -51,7 +51,7 @@ var LoginForm = Modal.extend({
     initialize: function(args) {
         _.extend(this, args);
         _.bindAll(this, "adjust");
-        this.options.title = Settings.VERSION;
+        this.options.title = "Аудит информационной безопасности " + Settings.VERSION;
         this.bind('open', this.adjust);
     },
 

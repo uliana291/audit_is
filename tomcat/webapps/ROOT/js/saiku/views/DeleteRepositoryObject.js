@@ -22,15 +22,15 @@ var DeleteRepositoryObject = Modal.extend({
     type: "delete",
     
     buttons: [
-        { text: "Yes", method: "del" },
-        { text: "No", method: "close" }
+        { text: "Да", method: "del" },
+        { text: "Нет", method: "close" }
     ],
     
     initialize: function(args) {
-        this.options.title = "Confirm deletion";
+        this.options.title = "Подтверждение удаления";
         this.query = args.query;
         this.success = args.success;
-        this.message = '<span class="i18n">Are you sure you want to delete </span>'+'<span>' + this.query.get('name') + '?</span>';
+        this.message = '<span class="i18n">Вы уверены, что хотите удалить </span>'+'<span>' + this.query.get('name') + '?</span>';
     },
     
     del: function() {
@@ -48,6 +48,6 @@ var DeleteRepositoryObject = Modal.extend({
     
     error: function() {
         $(this.el).find('dialog_body')
-            .html('<span class="i18n">Could not delete repository object</span>');
+            .html('<span class="i18n">Невозможно удалить репозиторий</span>');
     }
 });
